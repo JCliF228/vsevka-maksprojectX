@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Регистрация — КиноУгадайка</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>КиноУгадайка</h1>
+    <p>Создай аккаунт, чтобы сохранять результаты</p>
+    <nav>
+      <a href="index.html">Игра</a>
+      <a href="register.html">Регистрация</a>
+    </nav>
+  </header>
+
+  <main class="card">
+    <!-- ФОРМА РЕГИСТРАЦИИ
+         method="post" — данные отправляются скрытно (не в адресной строке).
+         action — адрес в Django, который примет данные. Уточни у того, кто делает Django.
+
+         ВАЖНО для Django: внутри <form> надо вставить тег csrf_token
+         (в фигурных скобках с процентами, вот так: открывающая скобка, знак процента,
+         csrf_token, знак процента, закрывающая скобка). Без него Django отклонит форму.
+         Это работает, только когда страница лежит в templates Django.
+
+         Атрибуты name="..." (username, email, password1, password2) — названия полей.
+         Они совпадают со стандартной регистрацией Django. Если в базе поля называются
+         иначе, поменяй name тут и больше ничего. -->
+    <form id="registerForm" method="post" action="/register/">
+
+      <label for="username">Имя пользователя</label>
+      <input id="username" name="username" required minlength="3" autocomplete="username">
+
+      <label for="email">Электронная почта</label>
+      <input id="email" name="email" type="email" required autocomplete="email">
+
+      <label for="password1">Пароль (минимум 6 символов)</label>
+      <input id="password1" name="password1" type="password" required autocomplete="new-password">
+
+      <label for="password2">Повтори пароль</label>
+      <input id="password2" name="password2" type="password" required autocomplete="new-password">
+
+      <!-- Сюда JS пишет ошибки и сообщение об успехе -->
+      <p class="msg" id="msg" aria-live="polite"></p>
+
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+  </main>
+
+  <script src="register.js"></script>
+</body>
+</html>

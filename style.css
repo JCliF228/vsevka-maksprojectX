@@ -1,0 +1,109 @@
+/* =====================================================
+   style.css — оформление ВСЕХ страниц сайта.
+   Меняй цвета и размеры здесь, в HTML трогать не нужно.
+   ===================================================== */
+
+/* ---- 1. ЦВЕТА (поменяй значения — перекрасится весь сайт) ---- */
+:root {
+  --bg: #0f2a2e;       /* фон страницы */
+  --panel: #173a3f;    /* фон карточки с игрой / формой */
+  --accent: #ffc93c;   /* главный цвет: заголовок, кнопки, рамка */
+  --text: #f4f6f1;     /* цвет обычного текста */
+  --muted: #9fb8b5;    /* приглушённый текст (подписи) */
+  --bad: #ff6b6b;      /* цвет ошибок */
+  --good: #5fd39a;     /* цвет успеха */
+}
+
+/* ---- 2. ОБЩЕЕ ---- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Rubik", system-ui, sans-serif; /* шрифт; подключается в <head> */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+}
+
+/* ---- 3. ШАПКА ---- */
+header { text-align: center; margin-bottom: 20px; }
+h1 { margin: 0; font-size: 2.8rem; font-weight: 800; color: var(--accent); }
+header p { margin: 6px 0 12px; color: var(--muted); }
+nav a { color: var(--accent); margin: 0 10px; }   /* ссылки в меню */
+
+/* ---- 4. КАРТОЧКА (в ней игра и форма регистрации) ---- */
+.card {
+  width: 100%;
+  max-width: 520px;           /* ширина карточки */
+  background: var(--panel);
+  border-radius: 18px;        /* скругление углов */
+  padding: 20px;
+  border: 2px dashed var(--accent); /* рамка; поставь "none" чтобы убрать */
+}
+
+/* ---- 5. ИГРА ---- */
+.status { display: flex; justify-content: space-between; color: var(--muted); margin-bottom: 14px; }
+.status b { color: var(--accent); }
+
+/* «экран» с эмодзи или картинкой фильма */
+.frame {
+  aspect-ratio: 16 / 9;       /* пропорции экрана */
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0b1f22;
+  display: grid;
+  place-items: center;
+  font-size: 4.5rem;          /* размер эмодзи */
+}
+.frame img { width: 100%; height: 100%; object-fit: cover; }
+
+/* список подсказок */
+.hints { list-style: none; padding: 0; margin: 16px 0; display: grid; gap: 8px; }
+.hints li { background: #0b1f22; border-radius: 10px; padding: 10px 14px; }
+.hints li.locked { color: var(--muted); font-style: italic; } /* закрытая подсказка */
+
+/* ---- 6. ФОРМЫ И КНОПКИ ---- */
+form { display: flex; flex-direction: column; gap: 10px; }
+.answer-row { display: flex; gap: 8px; }   /* поле + кнопка в одной строке в игре */
+
+label { font-size: 0.9rem; color: var(--muted); }
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  border-radius: 10px;
+  border: 0;
+  background: var(--text);
+  color: #102022;
+}
+
+button {
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #102022;
+}
+button:disabled { opacity: 0.5; cursor: default; }
+
+/* видимая обводка при управлении с клавиатуры (не удаляй — это доступность) */
+input:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* ---- 7. СООБЩЕНИЯ ---- */
+.msg { min-height: 1.5em; margin: 10px 0 0; font-weight: 500; }
+.msg.bad  { color: var(--bad); }
+.msg.good { color: var(--good); }
+
+/* ---- 8. ИТОГОВЫЙ ЭКРАН ---- */
+.result { text-align: center; }
+.result .score { font-size: 3.5rem; font-weight: 800; color: var(--accent); margin: 8px 0; }
+
+.hidden { display: none; }  /* прячет элемент (JS добавляет/убирает этот класс) */

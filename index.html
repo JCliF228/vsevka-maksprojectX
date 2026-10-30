@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>КиноУгадайка</title> <!-- название во вкладке браузера -->
+
+  <!-- Шрифт Rubik с Google Fonts (поддерживает русский). Можно заменить на другой. -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;800&display=swap" rel="stylesheet">
+
+  <!-- Подключаем оформление. Если страницу переносят в Django, путь станет вида /static/style.css -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ШАПКА: название сайта и меню. Тексты можно менять свободно. -->
+  <header>
+    <h1>КиноУгадайка</h1>
+    <p>Угадай фильм по эмодзи и подсказкам</p>
+    <nav>
+      <a href="index.html">Игра</a>
+      <a href="register.html">Регистрация</a>
+    </nav>
+  </header>
+
+  <main class="card">
+
+    <!-- ЭКРАН ИГРЫ (виден, пока идёт игра) -->
+    <section id="play">
+      <div class="status">
+        <span>Фильм <b id="round">1</b> из <span id="total">5</span></span>
+        <span>Очки: <b id="score">0</b></span>
+      </div>
+
+      <!-- Сюда JS вставляет эмодзи или картинку фильма -->
+      <div class="frame" id="frame"></div>
+
+      <!-- Сюда JS вставляет подсказки -->
+      <ul class="hints" id="hints"></ul>
+
+      <!-- Поле ответа. list="titles" — выпадающий список названий (его заполняет JS) -->
+      <form id="answerForm" class="answer-row" autocomplete="off">
+        <input id="answer" list="titles" placeholder="Название фильма" aria-label="Название фильма" required>
+        <button type="submit" id="submitBtn">Ответить</button>
+      </form>
+      <datalist id="titles"></datalist>
+
+      <!-- Сообщение «Верно!» / «Неверно» -->
+      <p class="msg" id="msg" aria-live="polite"></p>
+
+      <!-- Кнопка появляется после ответа -->
+      <button id="next" type="button" class="hidden">Дальше</button>
+    </section>
+
+    <!-- ИТОГОВЫЙ ЭКРАН (скрыт, пока игра не закончилась) -->
+    <section id="end" class="result hidden">
+      <h2>Игра окончена!</h2>
+      <div class="score"><span id="finalScore">0</span> / <span id="maxScore">15</span></div>
+      <p id="verdict"></p>
+      <button id="again" type="button">Сыграть ещё раз</button>
+    </section>
+
+  </main>
+
+  <!-- Скрипт игры. Ставим В КОНЦЕ body, чтобы к его запуску вся страница уже была загружена. -->
+  <script src="game.js"></script>
+</body>
+</html>
